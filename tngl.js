@@ -5,8 +5,8 @@ const STORAGE_KEY_VERSION = 'tngl_version';
 const APP_VERSION = '1.0.0';
 
 // JSONBin.io configuration for real-time sharing
-const JSONBIN_SCORES_ID = 'YOUR_SCORES_BIN_ID'; // Replace with your bin ID
-const JSONBIN_API_KEY = 'YOUR_API_KEY'; // Replace with your API key (optional for public bins)
+const JSONBIN_SCORES_ID = '695ae2d443b1c97be9193914'; // Replace with your bin ID
+const JSONBIN_API_KEY = '$2a$10$G9Z6PTtUjbyJuLkW.yao6.qVV2ER0gnuVb/lbmothcUcBtxkrLPe2'; // Replace with your API key (optional for public bins)
 const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
 
 // Teams
