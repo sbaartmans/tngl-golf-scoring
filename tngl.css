@@ -23,8 +23,36 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Color Legend */
+.color-legend {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
 .header-logo {
-    max-height: 80px;
+    max-height: 200px;
     width: auto;
 }
 
@@ -85,6 +113,34 @@ header {
 .score-table .score-input:disabled {
     background-color: #f8f9fa;
     cursor: not-allowed;
+}
+
+/* Stroke holes - green background for 1 stroke */
+.score-table td.stroke-hole {
+    background-color: #d4edda !important;
+}
+
+.score-table td.stroke-hole .score-input {
+    background-color: #d4edda;
+}
+
+.score-table td.stroke-hole .score-input:focus {
+    background-color: #c3e6cb;
+    border-color: #28a745;
+}
+
+/* Stroke holes - gold background for 2 strokes */
+.score-table td.stroke-hole-double {
+    background-color: #fff3cd !important;
+}
+
+.score-table td.stroke-hole-double .score-input {
+    background-color: #fff3cd;
+}
+
+.score-table td.stroke-hole-double .score-input:focus {
+    background-color: #ffeaa7;
+    border-color: #ffc107;
 }
 
 /* Team Sections */
@@ -198,7 +254,7 @@ footer {
     }
     
     .header-logo {
-        max-height: 60px;
+        max-height: 120px;
     }
 }
 
