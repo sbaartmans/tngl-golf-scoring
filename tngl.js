@@ -27,6 +27,7 @@ const TEAMS = {
 const COURSES = {
     'Paynes Valley': {
         name: "Payne's Valley",
+        videoUrl: 'https://www.youtube.com/watch?v=0lTRfNWynkg',
         holes: [
             { number: 1, par: 4, yards: 393, hcp: 3 },
             { number: 2, par: 3, yards: 197, hcp: 7 },
@@ -58,6 +59,7 @@ const COURSES = {
     },
     'Gilded Dunes': {
         name: 'Gilded Dunes',
+        videoUrl: 'https://www.youtube.com/watch?v=MJvfvvr9Ujc',
         holes: [
             { number: 1, par: 4, yards: 331, hcp: 18 },
             { number: 2, par: 5, yards: 587, hcp: 14 },
@@ -85,6 +87,7 @@ const COURSES = {
     },
     'Top of the Rock': {
         name: 'Top of the Rock',
+        videoUrl: 'https://www.youtube.com/watch?v=Q16p3SxdXiE&t=37s',
         holes: [
             { number: 1, par: 3, yards: 123, hcp: 15 },
             { number: 2, par: 3, yards: 75, hcp: 17 },
@@ -112,6 +115,7 @@ const COURSES = {
     },
     'Wynn Golf Course': {
         name: 'Wynn Golf Course',
+        videoUrl: 'https://www.youtube.com/watch?v=M7okURP0DUo',
         holes: [
             { number: 1, par: 4, yards: 395, hcp: 15 },
             { number: 2, par: 3, yards: 184, hcp: 11 },
@@ -537,7 +541,7 @@ function displayRound1() {
         <div class="round-header">
             <h3>${round.name}</h3>
             <p class="text-muted">${round.description}</p>
-            <p><strong>Course:</strong> ${course.name} | <strong>Points:</strong> ${round.points}</p>
+            <p><strong>Course:</strong> ${course.name} ${course.videoUrl ? `<a href="${course.videoUrl}" target="_blank" class="video-link" title="Watch Course Flyover"><i class="fab fa-youtube"></i> Flyover Video</a>` : ''} | <strong>Points:</strong> ${round.points}</p>
         </div>
     `;
     
@@ -572,7 +576,7 @@ function displayRound2A() {
         <div class="round-header">
             <h3>${round.name}</h3>
             <p class="text-muted">${round.description}</p>
-            <p><strong>Course:</strong> ${course.name} | <strong>Points:</strong> ${round.points}</p>
+            <p><strong>Course:</strong> ${course.name} ${course.videoUrl ? `<a href="${course.videoUrl}" target="_blank" class="video-link" title="Watch Course Flyover"><i class="fab fa-youtube"></i> Flyover Video</a>` : ''} | <strong>Points:</strong> ${round.points}</p>
         </div>
     `;
     
@@ -603,7 +607,7 @@ function displayRound2B() {
         <div class="round-header">
             <h3>${round.name}</h3>
             <p class="text-muted">${round.description}</p>
-            <p><strong>Course:</strong> ${course.name} | <strong>Points:</strong> ${round.points}</p>
+            <p><strong>Course:</strong> ${course.name} ${course.videoUrl ? `<a href="${course.videoUrl}" target="_blank" class="video-link" title="Watch Course Flyover"><i class="fab fa-youtube"></i> Flyover Video</a>` : ''} | <strong>Points:</strong> ${round.points}</p>
         </div>
     `;
     
@@ -638,7 +642,7 @@ function displayRound3() {
         <div class="round-header">
             <h3>${round.name}</h3>
             <p class="text-muted">${round.description}</p>
-            <p><strong>Course:</strong> ${course.name} | <strong>Points:</strong> ${round.points} per match</p>
+            <p><strong>Course:</strong> ${course.name} ${course.videoUrl ? `<a href="${course.videoUrl}" target="_blank" class="video-link" title="Watch Course Flyover"><i class="fab fa-youtube"></i> Flyover Video</a>` : ''} | <strong>Points:</strong> ${round.points} per match</p>
         </div>
     `;
     

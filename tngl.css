@@ -309,3 +309,21 @@ footer {
     border-color: #ffc107;
 }
 
+/* Video Links */
+.video-link {
+    color: #dc3545;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.video-link:hover {
+    color: #c82333;
+    text-decoration: underline;
+}
+
+.video-link i {
+    margin-right: 0.25rem;
+}
+
