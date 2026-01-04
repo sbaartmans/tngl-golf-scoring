@@ -1,0 +1,255 @@
+/* TNGL Golf Scoring Styles */
+
+:root {
+    --baartmans-color: #0d6efd;
+    --kraft-color: #dc3545;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container-fluid {
+    max-width: 1400px;
+}
+
+/* Header */
+header {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+    max-height: 80px;
+    width: auto;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+.card.leader {
+    border: 3px solid #ffc107;
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+}
+
+/* Score Tables */
+.score-table {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.score-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.score-table td {
+    text-align: center;
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.score-table .par-row {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.score-table .score-input {
+    width: 60px;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid #dee2e6;
+    transition: border-color 0.3s;
+}
+
+.score-table .score-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.score-table .score-input:disabled {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* Team Sections */
+.team-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.team-section h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.team-totals {
+    margin-top: 1.5rem;
+}
+
+.team-totals .alert {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Round Headers */
+.round-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.round-header h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.round-header p {
+    margin-bottom: 0.25rem;
+}
+
+/* Match Sections */
+.match-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.match-section h5 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Points Display */
+.points-display {
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    color: white;
+}
+
+.points-display h2 {
+    color: white;
+}
+
+.points-display .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Admin Mode */
+body.admin-mode .score-input {
+    border-color: #ffc107;
+}
+
+body.admin-mode .score-input:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+/* Footer */
+footer {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer-logo {
+    max-height: 60px;
+    width: auto;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .score-table {
+        font-size: 0.75rem;
+    }
+    
+    .score-table th,
+    .score-table td {
+        padding: 0.25rem;
+    }
+    
+    .score-table .score-input {
+        width: 50px;
+        font-size: 0.75rem;
+    }
+    
+    .header-logo {
+        max-height: 60px;
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin: 2rem auto;
+}
+
+/* Table Responsive */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-primary {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* Button Styling */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Form Switch */
+.form-check-input:checked {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
