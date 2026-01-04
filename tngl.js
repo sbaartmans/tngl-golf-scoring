@@ -730,7 +730,14 @@ function createScoreTable(roundKey, players, course, courseKey, showMatchPlay = 
                 outTotal += score;
                 outNet += netScore;
             }
-            html += `<td>`;
+            const strokes = playerStrokes[i];
+            let strokeClass = '';
+            if (strokes === 2) {
+                strokeClass = 'stroke-hole-double';
+            } else if (strokes > 0) {
+                strokeClass = 'stroke-hole';
+            }
+            html += `<td${strokeClass ? ` class="${strokeClass}"` : ''}>`;
             if (isAdmin || score !== null) {
                 html += `<input type="number" class="form-control form-control-sm score-input" 
                     data-round="${roundKey}" data-player="${player}" data-hole="${i}" 
@@ -751,7 +758,14 @@ function createScoreTable(roundKey, players, course, courseKey, showMatchPlay = 
                 inTotal += score;
                 inNet += netScore;
             }
-            html += `<td>`;
+            const strokes = playerStrokes[i];
+            let strokeClass = '';
+            if (strokes === 2) {
+                strokeClass = 'stroke-hole-double';
+            } else if (strokes > 0) {
+                strokeClass = 'stroke-hole';
+            }
+            html += `<td${strokeClass ? ` class="${strokeClass}"` : ''}>`;
             if (isAdmin || score !== null) {
                 html += `<input type="number" class="form-control form-control-sm score-input" 
                     data-round="${roundKey}" data-player="${player}" data-hole="${i}" 
