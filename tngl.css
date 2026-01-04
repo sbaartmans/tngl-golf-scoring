@@ -52,7 +52,7 @@ header {
 }
 
 .header-logo {
-    max-height: 200px;
+    max-height: 400px;
     width: auto;
 }
 
@@ -254,7 +254,7 @@ footer {
     }
     
     .header-logo {
-        max-height: 120px;
+        max-height: 240px;
     }
 }
 
