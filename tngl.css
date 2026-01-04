@@ -121,12 +121,12 @@ header {
 }
 
 .score-table td.stroke-hole .score-input {
-    background-color: #d4edda;
+    background-color: #d4edda !important;
 }
 
 .score-table td.stroke-hole .score-input:focus {
-    background-color: #c3e6cb;
-    border-color: #28a745;
+    background-color: #c3e6cb !important;
+    border-color: #28a745 !important;
 }
 
 /* Stroke holes - gold background for 2 strokes */
@@ -135,12 +135,12 @@ header {
 }
 
 .score-table td.stroke-hole-double .score-input {
-    background-color: #fff3cd;
+    background-color: #fff3cd !important;
 }
 
 .score-table td.stroke-hole-double .score-input:focus {
-    background-color: #ffeaa7;
-    border-color: #ffc107;
+    background-color: #ffeaa7 !important;
+    border-color: #ffc107 !important;
 }
 
 /* Team Sections */
