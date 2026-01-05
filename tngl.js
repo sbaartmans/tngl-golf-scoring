@@ -175,7 +175,7 @@ const ROUNDS = {
         course: 'Wynn Golf Course',
         points: 2,
         type: 'individualMatch',
-        description: 'Sean vs Brian, Kevin vs Jason, Steve vs Vinoo - Individual match play.'
+        description: 'Sean vs Brian, Steve vs Jason, Kevin vs Vinoo - Individual match play.'
     }
 };
 
@@ -652,16 +652,16 @@ function displayRound3() {
     html += createScoreTable('round3', ['Sean', 'Brian'], course, 'Wynn Golf Course', true);
     html += `</div>`;
     
-    // Match 2: Kevin vs Jason
+    // Match 2: Steve vs Jason
     html += `<div class="match-section">`;
-    html += `<h5>Kevin vs Jason</h5>`;
-    html += createScoreTable('round3', ['Kevin', 'Jason'], course, 'Wynn Golf Course', true);
+    html += `<h5>Steve vs Jason</h5>`;
+    html += createScoreTable('round3', ['Steve', 'Jason'], course, 'Wynn Golf Course', true);
     html += `</div>`;
     
-    // Match 3: Steve vs Vinoo
+    // Match 3: Kevin vs Vinoo
     html += `<div class="match-section">`;
-    html += `<h5>Steve vs Vinoo</h5>`;
-    html += createScoreTable('round3', ['Steve', 'Vinoo'], course, 'Wynn Golf Course', true);
+    html += `<h5>Kevin vs Vinoo</h5>`;
+    html += createScoreTable('round3', ['Kevin', 'Vinoo'], course, 'Wynn Golf Course', true);
     html += `</div>`;
     
     container.innerHTML = html;
@@ -839,6 +839,121 @@ function calculateAndDisplayTeamTotals(roundKey) {
     }
     
     html += '</div>';
+    
+    // Add best net score per hole table
+    html += displayBestNetPerHole();
+    
+    return html;
+}
+
+// Display best net score per hole for each team
+function displayBestNetPerHole() {
+    const baartmansPlayers = TEAMS.BAARTMANS.players;
+    const kraftPlayers = TEAMS.KRAFT.players;
+    
+    let html = '<div class="best-net-per-hole mt-4">';
+    html += '<h5 class="mb-3">Best Net Score Per Hole</h5>';
+    html += '<div class="table-responsive"><table class="table table-bordered table-sm score-table">';
+    
+    // Header row
+    html += '<thead><tr>';
+    html += '<th>Hole</th>';
+    for (let i = 1; i <= 9; i++) {
+        html += `<th>${i}</th>`;
+    }
+    html += '<th>Out</th>';
+    for (let i = 10; i <= 18; i++) {
+        html += `<th>${i}</th>`;
+    }
+    html += '<th>In</th>';
+    html += '<th>Total</th>';
+    html += '</tr></thead>';
+    
+    // Team Baartmans row
+    html += `<tr style="background-color: ${TEAMS.BAARTMANS.color}20;">`;
+    html += `<td><strong>${TEAMS.BAARTMANS.name}</strong></td>`;
+    let baartmansOut = 0;
+    let baartmansIn = 0;
+    
+    for (let hole = 0; hole < 9; hole++) {
+        const holeNets = baartmansPlayers.map(player => {
+            const playerData = scores.round1?.[player];
+            if (!playerData || playerData.scores[hole] === null) return null;
+            const strokes = COURSES['Paynes Valley'].players[player].strokes[hole];
+            return playerData.scores[hole] - strokes;
+        }).filter(net => net !== null);
+        
+        const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        if (bestNet !== null) {
+            baartmansOut += bestNet;
+        }
+        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+    }
+    
+    html += `<td><strong>${baartmansOut > 0 ? baartmansOut : '-'}</strong></td>`;
+    
+    for (let hole = 9; hole < 18; hole++) {
+        const holeNets = baartmansPlayers.map(player => {
+            const playerData = scores.round1?.[player];
+            if (!playerData || playerData.scores[hole] === null) return null;
+            const strokes = COURSES['Paynes Valley'].players[player].strokes[hole];
+            return playerData.scores[hole] - strokes;
+        }).filter(net => net !== null);
+        
+        const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        if (bestNet !== null) {
+            baartmansIn += bestNet;
+        }
+        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+    }
+    
+    html += `<td><strong>${baartmansIn > 0 ? baartmansIn : '-'}</strong></td>`;
+    html += `<td><strong>${baartmansOut + baartmansIn > 0 ? baartmansOut + baartmansIn : '-'}</strong></td>`;
+    html += '</tr>';
+    
+    // Team Kraft row
+    html += `<tr style="background-color: ${TEAMS.KRAFT.color}20;">`;
+    html += `<td><strong>${TEAMS.KRAFT.name}</strong></td>`;
+    let kraftOut = 0;
+    let kraftIn = 0;
+    
+    for (let hole = 0; hole < 9; hole++) {
+        const holeNets = kraftPlayers.map(player => {
+            const playerData = scores.round1?.[player];
+            if (!playerData || playerData.scores[hole] === null) return null;
+            const strokes = COURSES['Paynes Valley'].players[player].strokes[hole];
+            return playerData.scores[hole] - strokes;
+        }).filter(net => net !== null);
+        
+        const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        if (bestNet !== null) {
+            kraftOut += bestNet;
+        }
+        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+    }
+    
+    html += `<td><strong>${kraftOut > 0 ? kraftOut : '-'}</strong></td>`;
+    
+    for (let hole = 9; hole < 18; hole++) {
+        const holeNets = kraftPlayers.map(player => {
+            const playerData = scores.round1?.[player];
+            if (!playerData || playerData.scores[hole] === null) return null;
+            const strokes = COURSES['Paynes Valley'].players[player].strokes[hole];
+            return playerData.scores[hole] - strokes;
+        }).filter(net => net !== null);
+        
+        const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        if (bestNet !== null) {
+            kraftIn += bestNet;
+        }
+        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+    }
+    
+    html += `<td><strong>${kraftIn > 0 ? kraftIn : '-'}</strong></td>`;
+    html += `<td><strong>${kraftOut + kraftIn > 0 ? kraftOut + kraftIn : '-'}</strong></td>`;
+    html += '</tr>';
+    
+    html += '</table></div></div>';
     return html;
 }
 
@@ -916,10 +1031,10 @@ function calculateMatchPlayHoles(roundKey, player) {
     } else if (roundKey === 'round3') {
         if (player === 'Sean') opponent = 'Brian';
         else if (player === 'Brian') opponent = 'Sean';
-        else if (player === 'Kevin') opponent = 'Jason';
-        else if (player === 'Jason') opponent = 'Kevin';
-        else if (player === 'Steve') opponent = 'Vinoo';
-        else if (player === 'Vinoo') opponent = 'Steve';
+        else if (player === 'Steve') opponent = 'Jason';
+        else if (player === 'Jason') opponent = 'Steve';
+        else if (player === 'Kevin') opponent = 'Vinoo';
+        else if (player === 'Vinoo') opponent = 'Kevin';
     }
     
     if (!opponent) return;
@@ -992,18 +1107,18 @@ function updateOverallScores() {
         else if (brian > sean) kraftPoints += 2;
     }
     
-    const kevin = scores.round3?.['Kevin']?.holesWon || 0;
-    const jason = scores.round3?.['Jason']?.holesWon || 0;
-    if (kevin > 0 || jason > 0) {
-        if (kevin > jason) baartmansPoints += 2;
-        else if (jason > kevin) kraftPoints += 2;
+    const steveR3 = scores.round3?.['Steve']?.holesWon || 0;
+    const jasonR3 = scores.round3?.['Jason']?.holesWon || 0;
+    if (steveR3 > 0 || jasonR3 > 0) {
+        if (steveR3 > jasonR3) baartmansPoints += 2;
+        else if (jasonR3 > steveR3) kraftPoints += 2;
     }
     
-    const steveR3 = scores.round3?.['Steve']?.holesWon || 0;
+    const kevinR3 = scores.round3?.['Kevin']?.holesWon || 0;
     const vinooR3 = scores.round3?.['Vinoo']?.holesWon || 0;
-    if (steveR3 > 0 || vinooR3 > 0) {
-        if (steveR3 > vinooR3) baartmansPoints += 2;
-        else if (vinooR3 > steveR3) kraftPoints += 2;
+    if (kevinR3 > 0 || vinooR3 > 0) {
+        if (kevinR3 > vinooR3) baartmansPoints += 2;
+        else if (vinooR3 > kevinR3) kraftPoints += 2;
     }
     
     // Update display
