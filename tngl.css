@@ -167,6 +167,22 @@ header {
     font-weight: 600;
 }
 
+/* Best Net Per Hole Table */
+.best-net-per-hole {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+}
+
+.best-net-per-hole h5 {
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+}
+
 /* Round Headers */
 .round-header {
     margin-bottom: 1.5rem;

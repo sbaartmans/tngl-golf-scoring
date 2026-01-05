@@ -851,8 +851,8 @@ function displayBestNetPerHole() {
     const baartmansPlayers = TEAMS.BAARTMANS.players;
     const kraftPlayers = TEAMS.KRAFT.players;
     
-    let html = '<div class="best-net-per-hole mt-4">';
-    html += '<h5 class="mb-3">Best Net Score Per Hole</h5>';
+    let html = '<div class="best-net-per-hole mt-4 mb-4">';
+    html += '<h5 class="mb-3"><strong>Best Net Score Per Hole</strong></h5>';
     html += '<div class="table-responsive"><table class="table table-bordered table-sm score-table">';
     
     // Header row
