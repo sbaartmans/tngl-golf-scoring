@@ -268,12 +268,18 @@ body.admin-mode .score-input:focus {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%), url('images/chambers_pano.jpg');
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 100%), url('images/chambers_pano.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    color: #333;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .footer-logo {
