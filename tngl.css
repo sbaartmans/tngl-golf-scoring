@@ -68,6 +68,35 @@ header {
     overflow: hidden;
 }
 
+/* Round Background Images */
+#round1Container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%), url('images/bandon1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+}
+
+#round2aContainer {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%), url('images/bandon_2a.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+}
+
+#round2bContainer {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%), url('images/bandon_2b.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+}
+
+#round3Container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.8) 100%), url('images/torrey_3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+}
+
 .card-header {
     font-weight: 600;
 }
