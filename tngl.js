@@ -852,12 +852,11 @@ function displayBestNetPerHole() {
     const kraftPlayers = TEAMS.KRAFT.players;
     
     let html = '<div class="best-net-per-hole mt-4 mb-4">';
-    html += '<h5 class="mb-3"><strong>Best Net Score Per Hole</strong></h5>';
     html += '<div class="table-responsive"><table class="table table-bordered table-sm score-table">';
     
     // Header row
     html += '<thead><tr>';
-    html += '<th>Hole</th>';
+    html += '<th>Team</th>';
     for (let i = 1; i <= 9; i++) {
         html += `<th>${i}</th>`;
     }
@@ -867,13 +866,14 @@ function displayBestNetPerHole() {
     }
     html += '<th>In</th>';
     html += '<th>Total</th>';
-    html += '</tr></thead>';
+    html += '</tr></thead><tbody>';
     
     // Team Baartmans row
     html += `<tr style="background-color: ${TEAMS.BAARTMANS.color}20;">`;
     html += `<td><strong>${TEAMS.BAARTMANS.name}</strong></td>`;
     let baartmansOut = 0;
     let baartmansIn = 0;
+    const baartmansHoles = [];
     
     for (let hole = 0; hole < 9; hole++) {
         const holeNets = baartmansPlayers.map(player => {
@@ -884,10 +884,11 @@ function displayBestNetPerHole() {
         }).filter(net => net !== null);
         
         const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        baartmansHoles.push(bestNet);
         if (bestNet !== null) {
             baartmansOut += bestNet;
         }
-        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+        html += `<td><strong>${bestNet !== null ? bestNet : '-'}</strong></td>`;
     }
     
     html += `<td><strong>${baartmansOut > 0 ? baartmansOut : '-'}</strong></td>`;
@@ -901,10 +902,11 @@ function displayBestNetPerHole() {
         }).filter(net => net !== null);
         
         const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        baartmansHoles.push(bestNet);
         if (bestNet !== null) {
             baartmansIn += bestNet;
         }
-        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+        html += `<td><strong>${bestNet !== null ? bestNet : '-'}</strong></td>`;
     }
     
     html += `<td><strong>${baartmansIn > 0 ? baartmansIn : '-'}</strong></td>`;
@@ -916,6 +918,7 @@ function displayBestNetPerHole() {
     html += `<td><strong>${TEAMS.KRAFT.name}</strong></td>`;
     let kraftOut = 0;
     let kraftIn = 0;
+    const kraftHoles = [];
     
     for (let hole = 0; hole < 9; hole++) {
         const holeNets = kraftPlayers.map(player => {
@@ -926,10 +929,11 @@ function displayBestNetPerHole() {
         }).filter(net => net !== null);
         
         const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        kraftHoles.push(bestNet);
         if (bestNet !== null) {
             kraftOut += bestNet;
         }
-        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+        html += `<td><strong>${bestNet !== null ? bestNet : '-'}</strong></td>`;
     }
     
     html += `<td><strong>${kraftOut > 0 ? kraftOut : '-'}</strong></td>`;
@@ -943,17 +947,18 @@ function displayBestNetPerHole() {
         }).filter(net => net !== null);
         
         const bestNet = holeNets.length > 0 ? Math.min(...holeNets) : null;
+        kraftHoles.push(bestNet);
         if (bestNet !== null) {
             kraftIn += bestNet;
         }
-        html += `<td>${bestNet !== null ? bestNet : '-'}</td>`;
+        html += `<td><strong>${bestNet !== null ? bestNet : '-'}</strong></td>`;
     }
     
     html += `<td><strong>${kraftIn > 0 ? kraftIn : '-'}</strong></td>`;
     html += `<td><strong>${kraftOut + kraftIn > 0 ? kraftOut + kraftIn : '-'}</strong></td>`;
     html += '</tr>';
     
-    html += '</table></div></div>';
+    html += '</tbody></table></div></div>';
     return html;
 }
 

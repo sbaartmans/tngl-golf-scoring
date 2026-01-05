@@ -171,16 +171,38 @@ header {
 .best-net-per-hole {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    padding: 1.5rem;
+    padding: 1rem;
     background-color: white;
     border-radius: 8px;
-    border: 2px solid #dee2e6;
+    border: 3px solid #333;
 }
 
-.best-net-per-hole h5 {
-    color: #333;
+.best-net-per-hole table {
+    margin-bottom: 0;
+}
+
+.best-net-per-hole th {
+    background-color: #333 !important;
+    color: white !important;
     font-weight: 700;
-    text-align: center;
+    font-size: 1rem;
+    padding: 0.75rem !important;
+}
+
+.best-net-per-hole td {
+    font-size: 1.1rem;
+    padding: 0.75rem !important;
+    font-weight: 600;
+}
+
+.best-net-per-hole tr:first-child td:first-child {
+    background-color: #0d6efd !important;
+    color: white !important;
+}
+
+.best-net-per-hole tr:last-child td:first-child {
+    background-color: #dc3545 !important;
+    color: white !important;
 }
 
 /* Round Headers */
