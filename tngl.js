@@ -498,15 +498,86 @@ async function syncWithSharedData() {
     }
 }
 
+// Check if admin session is valid
+function checkAdminSession() {
+    const sessionData = sessionStorage.getItem(ADMIN_SESSION_KEY);
+    if (sessionData) {
+        const { timestamp } = JSON.parse(sessionData);
+        const now = Date.now();
+        if (now - timestamp < ADMIN_SESSION_DURATION) {
+            return true;
+        } else {
+            sessionStorage.removeItem(ADMIN_SESSION_KEY);
+        }
+    }
+    return false;
+}
+
+// Set admin session
+function setAdminSession() {
+    sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
+        timestamp: Date.now()
+    }));
+}
+
+// Clear admin session
+function clearAdminSession() {
+    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    isAdmin = false;
+    document.body.classList.remove('admin-mode');
+    const adminToggle = document.getElementById('adminToggle');
+    if (adminToggle) {
+        adminToggle.checked = false;
+    }
+    displayAllRounds();
+}
+
+// Prompt for admin password
+function promptAdminPassword() {
+    return prompt('Enter admin password to enable score editing:');
+}
+
 // Setup event listeners
 function setupEventListeners() {
+    // Check for existing admin session on load
+    if (checkAdminSession()) {
+        isAdmin = true;
+        document.body.classList.add('admin-mode');
+        const adminToggle = document.getElementById('adminToggle');
+        if (adminToggle) {
+            adminToggle.checked = true;
+        }
+    }
+    
     // Admin toggle
     const adminToggle = document.getElementById('adminToggle');
     if (adminToggle) {
         adminToggle.addEventListener('change', function() {
-            isAdmin = this.checked;
-            document.body.classList.toggle('admin-mode', isAdmin);
-            displayAllRounds();
+            if (this.checked) {
+                // Trying to enable admin mode - require password
+                if (checkAdminSession()) {
+                    // Already authenticated
+                    isAdmin = true;
+                    document.body.classList.add('admin-mode');
+                    displayAllRounds();
+                } else {
+                    // Need to authenticate
+                    const password = promptAdminPassword();
+                    if (password === ADMIN_PASSWORD) {
+                        isAdmin = true;
+                        setAdminSession();
+                        document.body.classList.add('admin-mode');
+                        displayAllRounds();
+                    } else {
+                        // Wrong password - uncheck the toggle
+                        this.checked = false;
+                        alert('Incorrect password. Admin mode not enabled.');
+                    }
+                }
+            } else {
+                // Disabling admin mode
+                clearAdminSession();
+            }
         });
     }
     
