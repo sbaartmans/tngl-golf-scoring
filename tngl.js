@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         displayAllRounds();
         updateOverallScores();
         setupEventListeners();
-        setInterval(syncWithSharedData, 30000); // Sync every 30 seconds
+        setInterval(() => syncWithSharedData(true), 30000); // Refresh every 30 seconds (read-only)
     });
 });
 
@@ -461,8 +461,8 @@ async function syncToJSONBin() {
     }
 }
 
-// Sync with shared data periodically
-async function syncWithSharedData() {
+// Sync with shared data (read-only - fetches latest data)
+async function syncWithSharedData(readOnly = false) {
     if (syncInProgress) return;
     syncInProgress = true;
     
@@ -477,6 +477,7 @@ async function syncWithSharedData() {
                 headers['X-Master-Key'] = JSONBIN_API_KEY;
             }
             
+            // Fetch latest data from remote
             const response = await fetch(`${JSONBIN_BASE_URL}/${JSONBIN_SCORES_ID}/latest?t=${Date.now()}`, {
                 method: 'GET',
                 mode: 'cors',
@@ -492,8 +493,13 @@ async function syncWithSharedData() {
                     scores = mergeScores(scores, remoteScores);
                     displayAllRounds();
                     updateOverallScores();
-                    console.log('Periodic sync updated scores from remote');
+                    console.log('✓ Synced scores from remote (read-only)');
                 }
+            }
+            
+            // Only write if in admin mode and not read-only
+            if (!readOnly && isAdmin) {
+                await syncToJSONBin();
             }
         }
     } catch (error) {
@@ -542,6 +548,20 @@ function promptAdminPassword() {
     return prompt('Enter admin password to enable score editing:');
 }
 
+// Update sync button text based on admin mode
+function updateSyncButtonText() {
+    const syncBtn = document.getElementById('syncBtn');
+    if (syncBtn) {
+        if (isAdmin) {
+            syncBtn.innerHTML = '<i class="fas fa-sync"></i> Sync';
+            syncBtn.title = 'Sync scores (read and write)';
+        } else {
+            syncBtn.innerHTML = '<i class="fas fa-sync"></i> Refresh';
+            syncBtn.title = 'Refresh scores (read-only)';
+        }
+    }
+}
+
 // Setup event listeners
 function setupEventListeners() {
     // Check for existing admin session on load
@@ -564,6 +584,7 @@ function setupEventListeners() {
                     // Already authenticated
                     isAdmin = true;
                     document.body.classList.add('admin-mode');
+                    updateSyncButtonText();
                     displayAllRounds();
                 } else {
                     // Need to authenticate
@@ -572,6 +593,7 @@ function setupEventListeners() {
                         isAdmin = true;
                         setAdminSession();
                         document.body.classList.add('admin-mode');
+                        updateSyncButtonText();
                         displayAllRounds();
                     } else {
                         // Wrong password - uncheck the toggle
@@ -582,6 +604,7 @@ function setupEventListeners() {
             } else {
                 // Disabling admin mode
                 clearAdminSession();
+                updateSyncButtonText();
             }
         });
     }
@@ -590,12 +613,25 @@ function setupEventListeners() {
     const syncBtn = document.getElementById('syncBtn');
     if (syncBtn) {
         syncBtn.addEventListener('click', function() {
-            syncWithSharedData();
-            this.innerHTML = '<i class="fas fa-sync fa-spin"></i> Syncing...';
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-sync"></i> Sync';
-            }, 2000);
+            if (isAdmin) {
+                // Admin mode: full sync (read + write)
+                syncWithSharedData(false);
+                this.innerHTML = '<i class="fas fa-sync fa-spin"></i> Syncing...';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync"></i> Sync';
+                }, 2000);
+            } else {
+                // Not admin: read-only refresh
+                syncWithSharedData(true);
+                this.innerHTML = '<i class="fas fa-sync fa-spin"></i> Refreshing...';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync"></i> Refresh';
+                }, 2000);
+            }
         });
+        
+        // Update button text based on admin mode
+        updateSyncButtonText();
     }
 }
 
