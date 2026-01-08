@@ -2,7 +2,10 @@
 // Storage keys
 const STORAGE_KEY_SCORES = 'tngl_scores';
 const STORAGE_KEY_VERSION = 'tngl_version';
-const APP_VERSION = '1.0.0';
+// App version - increment this to force localStorage clear on all browsers
+// Version 2.0.0+ required to write to new JSONBin
+const APP_VERSION = '2.0.0';
+const MIN_WRITE_VERSION = '2.0.0'; // Minimum version required to write to JSONBin
 
 // JSONBin.io configuration for real-time sharing
 const JSONBIN_SCORES_ID = '69600d19ae596e708fce5756'; // New bin ID - tngl-golf-scores-new
@@ -424,9 +427,35 @@ function saveScores() {
     }
 }
 
+// Check if current version can write to JSONBin
+function canWriteToJSONBin() {
+    return compareVersions(APP_VERSION, MIN_WRITE_VERSION) >= 0;
+}
+
+// Simple version comparison (assumes semantic versioning)
+function compareVersions(v1, v2) {
+    const parts1 = v1.split('.').map(Number);
+    const parts2 = v2.split('.').map(Number);
+    
+    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+        const part1 = parts1[i] || 0;
+        const part2 = parts2[i] || 0;
+        if (part1 > part2) return 1;
+        if (part1 < part2) return -1;
+    }
+    return 0;
+}
+
 // Sync to JSONBin
 async function syncToJSONBin() {
     if (syncInProgress) return;
+    
+    // Prevent old versions from writing to new bin
+    if (!canWriteToJSONBin()) {
+        console.warn('⚠ This version is too old to write to JSONBin. Please refresh the page.');
+        return;
+    }
+    
     syncInProgress = true;
     
     try {
