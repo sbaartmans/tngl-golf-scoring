@@ -12,14 +12,16 @@ const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
 // Teams
 const TEAMS = {
     BAARTMANS: {
-        name: 'Team Baartmans',
+        name: 'Full Metal Irons',
         players: ['Sean', 'Kevin', 'Steve'],
-        color: '#0d6efd'
+        color: '#0d6efd',
+        video: 'images/videos/Intro_Video_With_Military_Music.mp4'
     },
     KRAFT: {
-        name: 'Team Kraft',
+        name: 'Ace of Fades',
         players: ['Brian', 'Jason', 'Vinoo'],
-        color: '#dc3545'
+        color: '#dc3545',
+        video: 'images/videos/aceoffades.mp4'
     }
 };
 
