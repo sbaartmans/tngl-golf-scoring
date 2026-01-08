@@ -9,6 +9,11 @@ const JSONBIN_SCORES_ID = '695ae2d443b1c97be9193914'; // Replace with your bin I
 const JSONBIN_API_KEY = '$2a$10$G9Z6PTtUjbyJuLkW.yao6.qVV2ER0gnuVb/lbmothcUcBtxkrLPe2'; // Replace with your API key (optional for public bins)
 const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
 
+// Admin password (change this to your desired password)
+const ADMIN_PASSWORD = 'tngl2025'; // Change this password
+const ADMIN_SESSION_KEY = 'tngl_admin_session';
+const ADMIN_SESSION_DURATION = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+
 // Teams
 const TEAMS = {
     BAARTMANS: {
